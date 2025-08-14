@@ -1,5 +1,5 @@
 import streamlit as st
-import gspread, json
+import gspread, json, os
 from oauth2client.service_account import ServiceAccountCredentials
 from datetime import datetime
 import uuid
@@ -46,11 +46,12 @@ def log_to_sheet(action, value=None):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     SHEET.append_row([timestamp, user_id, st.session_state.session_id, action, value])
 
+DATA_PATH = os.path.join(os.path.dirname(__file__), "Nigerian Palatable meals.csv")
 # --- Load dataset ---
 @st.cache_data
 def load_data():
     try:
-        df = pd.read_csv(r"C:\Users\T490\Downloads\Nigerian Palatable meals.csv")
+        df = pd.read_csv(DATA_PATH)
         df.columns = df.columns.str.lower()
     except FileNotFoundError:
         df = pd.DataFrame(columns=["food_name", "ingredients", "procedures"])
