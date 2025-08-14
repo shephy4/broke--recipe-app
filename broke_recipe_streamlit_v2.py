@@ -1,5 +1,5 @@
 import streamlit as st
-import gspread
+import gspread, json
 from oauth2client.service_account import ServiceAccountCredentials
 from datetime import datetime
 import uuid
@@ -17,9 +17,13 @@ if "session_id" not in st.session_state:
 
 #user_id = st.text_input("Enter your name or email (optional)")
 user_id = ''
-# --- Google Sheets setup ---
+
+# Google Sheets setup
 SCOPE = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-CREDS = ServiceAccountCredentials.from_json_keyfile_name(r"C:\Users\T490\OneDrive\Documents\projects\recipe-logger-469014-fbc3a77c2d99.json", SCOPE)
+
+# Load service account from secrets
+creds_dict = json.loads(st.secrets["SERVICE_ACCOUNT_JSON"])
+CREDS = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, SCOPE)
 GSHEET_CLIENT = gspread.authorize(CREDS)
 SHEET = GSHEET_CLIENT.open("RecipeAppLog").sheet1
 

@@ -1,3 +1,6 @@
+
+# Ignore local secrets
+.streamlit/secrets.toml
 recipe-logger-469014-fbc3a77c2d99.json
 __pycache__/
 *.pyc
