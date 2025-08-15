@@ -1,5 +1,6 @@
 # 🥘 Broke Recipe App
 
+![App Screenshot](broke_recipe.png)
 
 
 Sometimes you have foodstuffs, but you just can't think of what to eat or prepare.  
