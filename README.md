@@ -75,7 +75,7 @@ You can try it here: https://broke--recipe-app.streamlit.app/
 
 📜 License
 
-MIT License — feel free to use, improve, and share.
+This project is licensed under the [MIT License](LICENSE).
 
 ✨ Author
 
