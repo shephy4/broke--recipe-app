@@ -46,12 +46,14 @@ def log_to_sheet(action, value=None):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     SHEET.append_row([timestamp, user_id, st.session_state.session_id, action, value])
 
-DATA_PATH = os.path.join(os.path.dirname(__file__), "Nigerian Palatable meals.csv")
-# --- Load dataset ---
+#DATA_PATH = os.path.join(os.path.dirname(__file__), "Nigerian Palatable meals.csv")
+# Fetch the CSV URL from secrets
+csv_url = st.secrets["CSV_URL"]
+
 @st.cache_data
 def load_data():
     try:
-        df = pd.read_csv(DATA_PATH)
+        df = pd.read_csv(csv_url)
         df.columns = df.columns.str.lower()
     except FileNotFoundError:
         df = pd.DataFrame(columns=["food_name", "ingredients", "procedures"])
